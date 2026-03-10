@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eid Mubarak 🌙</title>
+    <!-- Elegant Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cinzel:wght@400;600;700&family=Nunito:wght@300;400;600&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Canvas Confetti Library -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <style>
+        /* CSS Variables - Default to Dark Mode */
+        :root {
+            /* Dark Theme Colors (Default) */
+            --bg-grad-start: #02040f;
+            --bg-grad-end: #0b3d91;
+            --card-bg: rgba(11, 61, 145, 0.3);
+            --card-border: rgba(212, 175, 55, 0.3);
+            --text-primary: #f8f9fa;
+            --text-secondary: #e0e0e0;
+            --accent-gold: #d4af37;
+            --accent-gold-light: #f3e5ab;
+            --input-bg: rgba(0, 0, 0, 0.4);
+            
+            /* Fonts */
+            --font-heading: 'Cinzel', serif;
+            --font-arabic: 'Amiri', serif;
+            --font-body: 'Nunito', sans-serif;
+            
+            /* Brand Colors for Buttons */
+            --whatsapp-grad-1: #25D366;
+            --whatsapp-grad-2: #128C7E;
+        }
+
+        /* Light Theme Colors */
+        [data-theme="light"] {
+            --bg-grad-start: #e0f2fe;
+            --bg-grad-end: #bae6fd;
+            --card-bg: rgba(255, 255, 255, 0.7);
+            --card-border: rgba(212, 175, 55, 0.6);
+            --text-primary: #1e293b;
+            --text-secondary: #334155;
+            --accent-gold: #b38b22;
+            --accent-gold-light: #d4af37;
+            --input-bg: rgba(255, 255, 255, 0.9);
+        }
+
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: background-color 0.5s ease, color 0.5s ease;
+        }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--text-primary);
+            background: linear-gradient(135deg, var(--bg-grad-start), var(--bg-grad-end));
+            background-size: 400% 400%;
+            animation: gradientBg 15s ease infinite;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        @keyframes gradientBg {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Top Controls (Theme & Music) */
+        .controls-layer {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 100;
+            display: flex;
+            gap: 15px;
+        }
+
+        .control-btn {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            color: var(--accent-gold);
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            cursor: pointer;
+            backdrop-filter: blur(5px);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            padding: 0;
+        }
+
+        .control-btn:hover {
+            transform: scale(1.1) rotate(5deg);
+            background: rgba(212, 175, 55, 0.2);
+            box-shadow: 0 0 15px var(--accent-gold);
+        }
+
+        /* Background Art Elements */
+        .background-art {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        /* Interactive Stars */
+        #stars-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.7;
+        }
+
+        [data-theme="light"] #stars-canvas {
+            opacity: 0; /* Hide stars in light mode */
+        }
+
+        /* Elegant Mosque Silhouette */
+        .mosque-bg {
+            position: absolute;
+            bottom: -5vh; /* Hide standard bottom gap */
+            left: 0;
+            width: 100%;
+            height: clamp(200px, 35vh, 400px);
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400" preserveAspectRatio="xMidYMax slice"><path fill="%23d4af37" fill-opacity="0.15" d="M0,400 L0,350 L50,350 L50,280 C50,260 70,240 90,260 C110,240 130,260 130,280 L130,350 L180,350 L180,200 C180,150 220,100 250,150 C280,100 320,150 320,200 L320,350 L380,350 L380,280 C380,260 400,240 420,260 C440,240 460,260 460,280 L460,350 L500,350 L500,100 C500,0 600,-50 600,80 C600,-50 700,0 700,100 L700,350 L740,350 L740,280 C740,260 760,240 780,260 C800,240 820,260 820,280 L820,350 L880,350 L880,200 C880,150 920,100 950,150 C980,100 1020,150 1020,200 L1020,350 L1070,350 L1070,280 C1070,260 1090,240 1110,260 C1130,240 1150,260 1150,280 L1150,350 L1200,350 L1200,400 Z"/></svg>');
+            background-repeat: repeat-x;
+            background-position: bottom;
+            background-size: max(1200px, 100vw) auto;
+            filter: drop-shadow(0 -10px 20px rgba(0,0,0,0.5));
+            transition: opacity 0.5s ease;
+        }
+
+        [data-theme="light"] .mosque-bg {
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400" preserveAspectRatio="xMidYMax slice"><path fill="%231e293b" fill-opacity="0.1" d="M0,400 L0,350 L50,350 L50,280 C50,260 70,240 90,260 C110,240 130,260 130,280 L130,350 L180,350 L180,200 C180,150 220,100 250,150 C280,100 320,150 320,200 L320,350 L380,350 L380,280 C380,260 400,240 420,260 C440,240 460,260 460,280 L460,350 L500,350 L500,100 C500,0 600,-50 600,80 C600,-50 700,0 700,100 L700,350 L740,350 L740,280 C740,260 760,240 780,260 C800,240 820,260 820,280 L820,350 L880,350 L880,200 C880,150 920,100 950,150 C980,100 1020,150 1020,200 L1020,350 L1070,350 L1070,280 C1070,260 1090,240 1110,260 C1130,240 1150,260 1150,280 L1150,350 L1200,350 L1200,400 Z"/></svg>');
+        }
+
+        /* Floating Lanterns */
+        .floating-lantern {
+            position: absolute;
+            width: clamp(30px, 5vw, 60px);
+            filter: drop-shadow(0 0 15px var(--accent-gold));
+            animation: float-up 15s linear infinite;
+            bottom: -100px;
+            opacity: 0.8;
+            z-index: 1;
+        }
+
+        @keyframes float-up {
+            0% { transform: translateY(0) rotate(-5deg); opacity: 0; }
+            10% { opacity: 0.8; }
+            50% { transform: translateY(-50vh) rotate(5deg); }
+            90% { opacity: 0.8; }
+            100% { transform: translateY(-120vh) rotate(-5deg); opacity: 0; }
+        }
+
+        /* Layout Container */
+        .container {
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+        }
+
+        /* Header Area */
+        header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+            animation: slideDown 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+            opacity: 0;
+            transform: translateY(-50px);
+            width: 100%;
+        }
+
+        .moon-container {
+            font-size: clamp(3rem, 8vw, 5rem);
+            color: var(--accent-gold);
+            margin-bottom: 0.5rem;
+            display: inline-block;
+            animation: gentlyFloat 4s ease-in-out infinite alternate, glowPulse 3s infinite alternate;
+        }
+
+        @keyframes gentlyFloat {
+            0% { transform: translateY(0) rotate(-5deg); }
+            100% { transform: translateY(-15px) rotate(5deg); }
+        }
+
+        @keyframes glowPulse {
+            0% { filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.5)); }
+            100% { filter: drop-shadow(0 0 30px rgba(212, 175, 55, 1)); }
+        }
+
+        .main-heading {
+            font-family: var(--font-heading);
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            font-weight: 700;
+            color: var(--accent-gold-light);
+            text-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+            letter-spacing: 3px;
+            margin: 0;
+            background: linear-gradient(to right, var(--accent-gold), var(--accent-gold-light), #fff, var(--accent-gold));
+            -webkit-background-clip: text;
+            background-clip: text;
+            background-size: 200% auto;
+            animation: shine 5s linear infinite;
+        }
+
+        [data-theme="light"] .main-heading {
+            text-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            background: linear-gradient(to right, #b38b22, #d4af37, #8a6508, #b38b22);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        @keyframes shine {
+            to { background-position: 200% center; }
+        }
+
+        /* Glass Card */
+        .glass-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--card-border);
+            border-radius: 24px;
+            padding: clamp(1.5rem, 5vw, 3rem);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3), inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+            text-align: center;
+            width: 100%;
+            animation: fadeInCard 1s cubic-bezier(0.2, 0.8, 0.2, 1) 0.5s forwards;
+            opacity: 0;
+            transform: scale(0.95);
+            margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transform: skewX(-20deg);
+            animation: cardShine 8s infinite;
+        }
+
+        @keyframes cardShine {
+            0% { left: -100%; }
+            20% { left: 200%; }
+            100% { left: 200%; }
+        }
+
+        @keyframes slideDown {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInCard {
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        /* Typography inside Card */
+        .arabic-bismillah {
+            font-family: var(--font-arabic);
+            font-size: 2rem;
+            color: var(--accent-gold);
+            margin-bottom: 1rem;
+            font-style: italic;
+        }
+
+        .message-content {
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            line-height: 1.8;
+            color: var(--text-primary);
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .dynamic-greeting {
+            font-family: var(--font-heading);
+            font-size: clamp(1.4rem, 4vw, 2rem);
+            color: var(--accent-gold-light);
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: rgba(212, 175, 55, 0.1);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 16px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            position: relative;
+            display: inline-block;
+            width: 100%;
+            animation: pulseGreeting 2s infinite alternate;
+        }
+
+        [data-theme="light"] .dynamic-greeting {
+            color: var(--accent-gold);
+            text-shadow: none;
+            background: rgba(212, 175, 55, 0.05);
+        }
+
+        @keyframes pulseGreeting {
+            0% { box-shadow: 0 0 0 rgba(212, 175, 55, 0); }
+            100% { box-shadow: 0 0 20px rgba(212, 175, 55, 0.3); }
+        }
+
+        .decorative-divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 2.5rem 0;
+            opacity: 0.6;
+            color: var(--accent-gold);
+        }
+
+        .decorative-divider::before, 
+        .decorative-divider::after {
+            content: '';
+            height: 1px;
+            flex: 1;
+            background: linear-gradient(to right, transparent, var(--accent-gold), transparent);
+        }
+
+        .decorative-divider i {
+            margin: 0 1rem;
+            font-size: 0.8rem;
+        }
+
+        /* Input Controls Setup */
+        .creator-section {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 2rem;
+            border-radius: 16px;
+            border: 1px solid rgba(255,255,255,0.05);
+            text-align: left;
+        }
+
+        [data-theme="light"] .creator-section {
+            background: rgba(255, 255, 255, 0.5);
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .creator-title {
+            color: var(--accent-gold);
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .input-group {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 1.2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--accent-gold);
+            font-size: 1.1rem;
+            z-index: 2;
+        }
+
+        .styled-input {
+            width: 100%;
+            padding: 1.2rem 1rem 1.2rem 3.5rem;
+            border-radius: 12px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            background: var(--input-bg);
+            color: var(--text-primary);
+            font-family: var(--font-body);
+            font-size: 1.05rem;
+            transition: all 0.3s ease;
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .styled-input::placeholder {
+            color: var(--text-secondary);
+            opacity: 0.7;
+        }
+
+        .styled-input:focus {
+            outline: none;
+            border-color: var(--accent-gold);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.3), inset 0 2px 5px rgba(0,0,0,0.1);
+            transform: translateY(-2px);
+        }
+
+        /* Advanced Buttons */
+        .btn {
+            width: 100%;
+            padding: 1.2rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-family: var(--font-body);
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .btn::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255,255,255,0.2);
+            z-index: -1;
+            transform: scaleY(0);
+            transform-origin: bottom center;
+            transition: transform 0.4s ease;
+        }
+
+        .btn:hover::after {
+            transform: scaleY(1);
+        }
+
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        }
+
+        .btn:active {
+            transform: translateY(2px);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-gold), #b38b22);
+            color: #000;
+            box-shadow: 0 6px 15px rgba(212, 175, 55, 0.3);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--accent-gold);
+            color: var(--accent-gold-light);
+            margin-top: 1rem;
+        }
+        
+        [data-theme="light"] .btn-outline {
+            color: var(--accent-gold);
+            border-color: var(--accent-gold);
+        }
+
+        .btn-outline:hover {
+            background: rgba(212, 175, 55, 0.1);
+        }
+
+        .btn-whatsapp {
+            background: linear-gradient(135deg, var(--whatsapp-grad-1), var(--whatsapp-grad-2));
+            color: white;
+            box-shadow: 0 6px 15px rgba(37, 211, 102, 0.3);
+        }
+
+        /* Results Display Setup */
+        #result-container {
+            display: none; /* hidden by default */
+            margin-top: 2rem;
+            animation: slideUpFade 0.6s ease-out forwards;
+        }
+
+        @keyframes slideUpFade {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .generated-link-display {
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px dashed var(--accent-gold);
+            padding: 1.2rem;
+            border-radius: 12px;
+            font-family: monospace;
+            color: var(--accent-gold-light);
+            word-break: break-all;
+            margin-bottom: 1.5rem;
+            user-select: all;
+            font-size: 0.95rem;
+        }
+
+        [data-theme="light"] .generated-link-display {
+            background: rgba(255, 255, 255, 0.8);
+            color: var(--accent-gold);
+            border: 1px dashed var(--accent-gold);
+        }
+
+        .action-row {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+
+        /* Footer */
+        footer {
+            margin-top: auto;
+            text-align: center;
+            padding: 2rem 1rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            z-index: 10;
+            animation: fadeInCard 1s ease-out 1s forwards;
+            opacity: 0;
+        }
+
+        /* Responsive Breakpoints */
+        @media (min-width: 640px) {
+            .action-row {
+                grid-template-columns: 1fr 1fr;
+            }
+            .btn-outline {
+                margin-top: 0; /* Reset margin on grid */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .glass-card { padding: 1.5rem; }
+            .creator-section { padding: 1.2rem; }
+            .controls-layer { top: 10px; right: 10px; }
+            .control-btn { width: 40px; height: 40px; font-size: 1rem; }
+        }
+
+        /* Entry Splash Screen */
+        #entry-splash {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: radial-gradient(ellipse at center, #0b3d91 0%, #02040f 100%);
+            cursor: pointer;
+            transition: opacity 0.8s ease;
+        }
+        #entry-splash.fade-out {
+            opacity: 0;
+            pointer-events: none;
+        }
+        #entry-splash .splash-moon {
+            font-size: 5rem;
+            animation: gentlyFloat 4s ease-in-out infinite alternate;
+            margin-bottom: 1rem;
+            filter: drop-shadow(0 0 30px rgba(212,175,55,0.8));
+        }
+        #entry-splash .splash-title {
+            font-family: var(--font-heading);
+            font-size: clamp(1.5rem, 5vw, 2.5rem);
+            color: var(--accent-gold-light);
+            letter-spacing: 3px;
+            margin-bottom: 0.5rem;
+        }
+        #entry-splash .splash-subtitle {
+            font-family: var(--font-body);
+            color: rgba(255,255,255,0.6);
+            font-size: 1rem;
+            animation: splashPulse 1.5s ease-in-out infinite;
+        }
+        @keyframes splashPulse {
+            0%, 100% { opacity: 0.6; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.05); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Entry Splash (One Click to Unlock Autoplay) -->
+    <div id="entry-splash">
+        <div class="splash-moon">🌙</div>
+        <div class="splash-title">Eid Mubarak</div>
+        <div class="splash-subtitle">✨ Tap anywhere to open your greeting ✨</div>
+    </div>
+
+    <!-- Theme & Audio Controls -->
+    <div class="controls-layer">
+        <button id="theme-btn" class="control-btn" aria-label="Toggle Theme">
+            <i class="fas fa-sun"></i>
+        </button>
+        <button id="music-btn" class="control-btn" aria-label="Toggle Music">
+            <i class="fas fa-music"></i>
+        </button>
+    </div>
+
+    <!-- Hidden Audio Element -->
+    <audio id="bg-music" loop>
+        <source src="ramadan.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Background Art Elements -->
+    <div class="background-art">
+        <canvas id="stars-canvas"></canvas>
+        <div class="mosque-bg"></div>
+        <div id="lanterns-container"></div>
+    </div>
+
+    <!-- Main Active Interface -->
+    <div class="container">
+        <header>
+            <div class="moon-container">
+                <i class="fas fa-moon"></i>
+            </div>
+            <h1 class="main-heading">Eid Mubarak <span style="font-family:'Segoe UI Emoji', Arial;">✨</span></h1>
+        </header>
+
+        <main style="width: 100%;">
+            <div class="glass-card">
+                <div class="arabic-bismillah">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم</div>
+                
+                <p class="message-content">
+                    As the blessed month of Ramadan has passed, may Allah accept our fasts, prayers, and all good deeds. May He forgive our sins, grant us His endless mercy, and keep our hearts firm in faith.<br><br>
+                    May this Eid bring peace, happiness, and countless blessings to you and your family. Ameen.
+                </p>
+
+                <!-- Dynamic Greeting Display -->
+                <div id="greeting-display" class="dynamic-greeting">
+                    With warm wishes from <strong id="display-from">Someone</strong> to <strong id="display-to">You</strong>.
+                </div>
+
+                <div class="decorative-divider">
+                    <i class="fas fa-star-and-crescent"></i>
+                </div>
+
+                <!-- Input Controls -->
+                <div class="creator-section">
+                    <h3 class="creator-title">Send This Beautiful Greeting</h3>
+                    
+                    <div class="input-group">
+                        <i class="fas fa-user-pen input-icon"></i>
+                        <input type="text" id="input-sender" class="styled-input" placeholder="Your Name" autocomplete="off">
+                    </div>
+                    
+                    <div class="input-group">
+                        <i class="fas fa-user-group input-icon"></i>
+                        <input type="text" id="input-receiver" class="styled-input" placeholder="Receiver Name" autocomplete="off">
+                    </div>
+                    
+                    <button id="generate-btn" class="btn btn-primary">
+                        <i class="fas fa-wand-magic-sparkles"></i>
+                        <span>Generate Shareable Link</span>
+                    </button>
+
+                    <!-- Hidden Results Panel -->
+                    <div id="result-container">
+                        <div class="generated-link-display" id="link-text"></div>
+                        
+                        <div class="action-row">
+                            <button id="copy-btn" class="btn btn-outline">
+                                <i class="fas fa-copy"></i>
+                                <span>Copy Link</span>
+                            </button>
+                            <button id="whatsapp-btn" class="btn btn-whatsapp">
+                                <i class="fab fa-whatsapp"></i>
+                                <span>Share on WhatsApp</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>May Allah bless everyone with peace, mercy, and happiness.</p>
+        </footer>
+    </div>
+
+    <!-- Application Logic -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // === UI Elements === //
+            const themeBtn = document.getElementById('theme-btn');
+            const themeIcon = themeBtn.querySelector('i');
+            const musicBtn = document.getElementById('music-btn');
+            const musicIcon = musicBtn.querySelector('i');
+            const bgMusic = document.getElementById('bg-music');
+            
+            const displayFrom = document.getElementById('display-from');
+            const displayTo = document.getElementById('display-to');
+            
+            const inputSender = document.getElementById('input-sender');
+            const inputReceiver = document.getElementById('input-receiver');
+            const generateBtn = document.getElementById('generate-btn');
+            
+            const resultContainer = document.getElementById('result-container');
+            const linkText = document.getElementById('link-text');
+            const copyBtn = document.getElementById('copy-btn');
+            const whatsappBtn = document.getElementById('whatsapp-btn');
+            const lanternsContainer = document.getElementById('lanterns-container');
+
+            // === 1. Fire Confetti on Load === //
+            const fireConfetti = () => {
+                const duration = 3000;
+                const end = Date.now() + duration;
+
+                (function frame() {
+                    confetti({
+                        particleCount: 5,
+                        angle: 60,
+                        spread: 55,
+                        origin: { x: 0 },
+                        colors: ['#d4af37', '#ffffff', '#128C7E']
+                    });
+                    confetti({
+                        particleCount: 5,
+                        angle: 120,
+                        spread: 55,
+                        origin: { x: 1 },
+                        colors: ['#d4af37', '#ffffff', '#128C7E']
+                    });
+
+                    if (Date.now() < end) {
+                        requestAnimationFrame(frame);
+                    }
+                }());
+            };
+            
+            // Fire slight delay to match card entry animation
+            setTimeout(fireConfetti, 800);
+
+            // === 2. URL Parameters Handling === //
+            const processUrlParams = () => {
+                const params = new URLSearchParams(window.location.search);
+                const fromParam = params.get('from');
+                const toParam = params.get('to');
+                
+                // Sanitize function to prevent XSS
+                const sanitize = (str) => {
+                    const temp = document.createElement('div');
+                    temp.textContent = str;
+                    return temp.innerHTML;
+                };
+
+                if (fromParam) {
+                    displayFrom.innerHTML = sanitize(fromParam);
+                    inputSender.value = sanitize(fromParam); // Prefill form
+                }
+                if (toParam) {
+                    displayTo.innerHTML = sanitize(toParam);
+                    inputReceiver.value = sanitize(toParam); // Prefill form
+                }
+            };
+            processUrlParams();
+
+            // === 3. Generate Link Action === //
+            const getCleanBaseUrl = () => window.location.href.split('?')[0];
+
+            generateBtn.addEventListener('click', () => {
+                const sender = inputSender.value.trim();
+                const receiver = inputReceiver.value.trim();
+
+                // Validation
+                if (!sender || !receiver) {
+                    if (!sender) {
+                        inputSender.style.animation = 'shake 0.5s ease';
+                        inputSender.focus();
+                        setTimeout(() => inputSender.style.animation = '', 500);
+                    } else if (!receiver) {
+                        inputReceiver.style.animation = 'shake 0.5s ease';
+                        inputReceiver.focus();
+                        setTimeout(() => inputReceiver.style.animation = '', 500);
+                    }
+                    return;
+                }
+
+                // Transform button for feedback
+                const origIcon = generateBtn.innerHTML;
+                generateBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i><span>Generating...</span>';
+                
+                setTimeout(() => {
+                    // Update the display immediately
+                    const safeSender = sanitizeInput(sender);
+                    const safeReceiver = sanitizeInput(receiver);
+                    displayFrom.innerHTML = safeSender;
+                    displayTo.innerHTML = safeReceiver;
+
+                    // Create Share URL
+                    const shareUrl = `${getCleanBaseUrl()}?from=${encodeURIComponent(sender)}&to=${encodeURIComponent(receiver)}`;
+                    
+                    // Show result module
+                    linkText.textContent = shareUrl;
+                    resultContainer.style.display = 'block';
+                    
+                    // Reset generate button
+                    generateBtn.innerHTML = origIcon;
+                    
+                    // Tiny scroll to reveal buttons on constrained screens
+                    setTimeout(() => {
+                        resultContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                    }, 100);
+
+                    // Fire a burst to celebrate link generation
+                    confetti({
+                        particleCount: 100,
+                        spread: 70,
+                        origin: { y: 0.6 },
+                        colors: ['#d4af37', '#f3e5ab']
+                    });
+
+                }, 500); // Fake delay for UX feel
+            });
+
+            const sanitizeInput = (str) => {
+                const temp = document.createElement('div');
+                temp.textContent = str;
+                return temp.innerHTML;
+            };
+
+            // === 4. Copy Link Action === //
+            copyBtn.addEventListener('click', () => {
+                const currentLink = linkText.textContent;
+                if (!currentLink) return;
+
+                navigator.clipboard.writeText(currentLink).then(() => {
+                    const originalHTML = copyBtn.innerHTML;
+                    copyBtn.innerHTML = '<i class="fas fa-check"></i><span>Copied!</span>';
+                    copyBtn.style.background = 'rgba(212, 175, 55, 0.2)';
+                    
+                    setTimeout(() => {
+                        copyBtn.innerHTML = originalHTML;
+                        copyBtn.style.background = '';
+                    }, 2000);
+                });
+            });
+
+            // === 5. WhatsApp Share Action === //
+            whatsappBtn.addEventListener('click', () => {
+                const currentLink = linkText.textContent;
+                if (!currentLink) return;
+
+                const textMessage = `Eid Mubarak 🌙\nA special Eid wish for you.\n\nClick the link to see your personalized Eid greeting:\n${currentLink}`;
+                const waWindowUrl = `https://wa.me/?text=${encodeURIComponent(textMessage)}`;
+                
+                window.open(waWindowUrl, '_blank');
+            });
+
+            // === 6. Background Decorations (Canvas Stars & Lanterns) === //
+            
+            // Canvas Stars (Only in dark mode)
+            const canvas = document.getElementById('stars-canvas');
+            const ctx = canvas.getContext('2d');
+            let stars = [];
+
+            const initCanvas = () => {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+                stars = [];
+                for(let i = 0; i < 150; i++) {
+                    stars.push({
+                        x: Math.random() * canvas.width,
+                        y: Math.random() * canvas.height,
+                        radius: Math.random() * 1.5,
+                        speed: Math.random() * 0.5,
+                        alpha: Math.random()
+                    });
+                }
+            };
+
+            const drawStars = () => {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.fillStyle = '#ffffff';
+                
+                stars.forEach(star => {
+                    ctx.globalAlpha = star.alpha;
+                    ctx.beginPath();
+                    ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+                    ctx.fill();
+
+                    // Animate
+                    star.alpha += (Math.random() - 0.5) * 0.1;
+                    if(star.alpha < 0.1) star.alpha = 0.1;
+                    if(star.alpha > 0.9) star.alpha = 0.9;
+                    
+                    star.y -= star.speed;
+                    if(star.y < 0) {
+                        star.y = canvas.height;
+                        star.x = Math.random() * canvas.width;
+                    }
+                });
+                
+                requestAnimationFrame(drawStars);
+            };
+
+            window.addEventListener('resize', initCanvas);
+            initCanvas();
+            drawStars();
+
+            // Floating Lanterns
+            const generateLanterns = () => {
+                const lanternCount = window.innerWidth < 600 ? 3 : 6;
+                
+                for(let i=0; i<lanternCount; i++) {
+                    const lantern = document.createElement('img');
+                    lantern.src = "https://cdn-icons-png.flaticon.com/512/2853/2853174.png";
+                    lantern.className = 'floating-lantern';
+                    
+                    // Randomize position and timing
+                    lantern.style.left = `${Math.random() * 90 + 5}vw`;
+                    lantern.style.animationDuration = `${15 + Math.random() * 10}s`;
+                    lantern.style.animationDelay = `${Math.random() * 10}s`;
+                    lantern.style.width = window.innerWidth < 600 ? 
+                        `${20 + Math.random()*20}px` : 
+                        `${30 + Math.random()*30}px`;
+                    
+                    lanternsContainer.appendChild(lantern);
+                }
+            };
+            generateLanterns();
+
+            // === 7. Theme & Audio Toggles === //
+            let isLightMode = false;
+            themeBtn.addEventListener('click', () => {
+                isLightMode = !isLightMode;
+                if(isLightMode) {
+                    document.body.setAttribute('data-theme', 'light');
+                    themeIcon.className = 'fas fa-moon';
+                } else {
+                    document.body.removeAttribute('data-theme');
+                    themeIcon.className = 'fas fa-sun';
+                }
+            });
+
+            let isPlaying = false;
+
+            // Entry splash unlocks browser autoplay in ONE guaranteed click
+            const splash = document.getElementById('entry-splash');
+            splash.addEventListener('click', () => {
+                // This click is user interaction — browser MUST allow play() after this
+                bgMusic.muted = false;
+                bgMusic.play().then(() => {
+                    musicIcon.className = 'fas fa-pause';
+                    musicBtn.style.color = '#fff';
+                    isPlaying = true;
+                }).catch(e => console.log('Play failed:', e));
+
+                // Fade out the splash
+                splash.classList.add('fade-out');
+                setTimeout(() => splash.remove(), 800);
+            }, { once: true });
+
+            // Manual play/pause toggle
+            musicBtn.addEventListener('click', () => {
+                if(isPlaying) {
+                    bgMusic.pause();
+                    musicIcon.className = 'fas fa-music';
+                    musicBtn.style.color = 'var(--accent-gold)';
+                } else {
+                    bgMusic.muted = false;
+                    bgMusic.play().then(() => {
+                        musicIcon.className = 'fas fa-pause';
+                        musicBtn.style.color = '#fff';
+                    }).catch(e => console.log('Audio play blocked', e));
+                }
+                isPlaying = !isPlaying;
+            });
+
+            // Enter key listeners
+            const handleEnter = (e) => {
+                if (e.key === 'Enter') generateBtn.click();
+            };
+            inputSender.addEventListener('keypress', handleEnter);
+            inputReceiver.addEventListener('keypress', handleEnter);
+
+            // Add shake animation style dynamically
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes shake {
+                    0%, 100% { transform: translateX(0); }
+                    25% { transform: translateX(-5px); }
+                    50% { transform: translateX(5px); }
+                    75% { transform: translateX(-5px); }
+                }
+            `;
+            document.head.appendChild(style);
+        });
+    </script>
+</body>
+</html>
